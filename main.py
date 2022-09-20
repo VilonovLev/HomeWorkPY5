@@ -1,7 +1,7 @@
 from random import randint
 from functools import reduce
 import zip
-# # Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
+# Напишите программу, удаляющую из текста все слова, содержащие ""абв"".
 text = "абы абв лфв абй бвф жло кабв"
 print(" ".join(i for i in text.split() if not "абв" in i))
 
@@ -65,14 +65,15 @@ def win(fld):
 def turn(id, fld):
     while True:
         x = int(input("Укажите номер ячейки: "))
-        if x < 1 or x > 9 or not fld[x].isdigit():
+        if x < 1 or x > 9 or (not fld[x].isdigit()):
             print("Недопустимый ход")
-        elif id > 0:
-            fld[x] = "x"
-            return
         else:
-            fld[x] = "o"
-            return
+            if id >=0:
+                fld[x] = "x"
+                break
+            else:
+                fld[x] = "o"
+                break
 
 
 field = ["", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
@@ -83,6 +84,7 @@ while win(field):
     print(f"Ход игрока {t_playrs[id_plr]}")
     turn(id_plr, field)
     id_plr = ~id_plr
+draw(field)
 print(f"Победил игрок {t_playrs[~id_plr]}")
 
 # Реализуйте RLE алгоритм: реализуйте модуль сжатия и восстановления данных.
